@@ -1,0 +1,7 @@
+F:\Documents\GitHub\WosHelper\Core\bin\Debug\Core.exe.config
+F:\Documents\GitHub\WosHelper\Core\bin\Debug\Core.exe
+F:\Documents\GitHub\WosHelper\Core\bin\Debug\Core.pdb
+F:\Documents\GitHub\WosHelper\Core\bin\Debug\mysql.data.dll
+F:\Documents\GitHub\WosHelper\Core\obj\Debug\Core.exe
+F:\Documents\GitHub\WosHelper\Core\obj\Debug\Core.pdb
+F:\Documents\GitHub\WosHelper\Core\obj\Debug\WosHelper.Core.csprojResolveAssemblyReference.cache
