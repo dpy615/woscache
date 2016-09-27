@@ -10,13 +10,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
   </PropertyGroup>
   <ItemGroup>
     <File Include="bin/Core.exe">
-      <publishTime>09/27/2016 21:41:41</publishTime>
+      <publishTime>09/27/2016 23:37:12</publishTime>
     </File>
     <File Include="bin/MySql.Data.dll">
       <publishTime>09/22/2016 20:51:23</publishTime>
     </File>
     <File Include="bin/WosHelper.dll">
-      <publishTime>09/27/2016 21:41:41</publishTime>
+      <publishTime>09/27/2016 23:40:46</publishTime>
     </File>
     <File Include="Web.config">
       <publishTime>09/27/2016 20:48:50</publishTime>

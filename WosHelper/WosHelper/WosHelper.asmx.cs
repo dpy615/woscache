@@ -18,8 +18,14 @@ namespace WosHelper {
     public class WosHelper : System.Web.Services.WebService {
         SearcherTool searcher = new SearcherTool();
         [WebMethod]
-        public WosData Searcher(string title) {
+        public WosData SearchByTitle(string title) {
             WosData wosData = searcher.Search(title);
+            return wosData;
+        }
+
+        [WebMethod]
+        public WosData SearchByTitleAndYear(string title, string year) {
+            WosData wosData = searcher.Search(title, year);
             return wosData;
         }
     }

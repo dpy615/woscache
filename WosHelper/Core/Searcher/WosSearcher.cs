@@ -9,17 +9,21 @@ namespace Core.Searcher {
     public class WosSearcher {
         string jessionID = "";
         string sID = "";
-        HttpHelper http;
+        HttpHelper http = null;
         HttpResult result;
         string cookie;
         public string[] Search(string title, bool isCn) {
+            this.InitHttp();
             return DownLoad(http, ref result, cookie, title, isCn);
         }
 
         public WosData Search(string title) {
             WosData wosData = new WosData();
             string[] datas = Search(title, false);
-            wosData.dataArray = datas;
+            if (datas == null) {
+                return null;
+            }
+            wosData.setDataArray(datas);
             return wosData;
         }
 
@@ -90,7 +94,6 @@ namespace Core.Searcher {
         //}
 
         public void InitHttp() {
-            http = new HttpHelper();
             HttpItem item = new HttpItem() {
                 URL = "http://apps.webofknowledge.com/",//URL     必需项    
                 Method = "get",//URL     可选项 默认为Get   
@@ -159,6 +162,9 @@ namespace Core.Searcher {
 
             string url = item.URL;
             var titles = Regex.Matches(result.Html.Replace("\r", "").Replace("\n", ""), reg_title);
+            if (titles.Count < 1) {
+                return null;
+            }
 
             var tmpUrl = Regex.Match(result.Html, reg_rurl).ToString();
             string rurl = tmpUrl.Substring(tmpUrl.IndexOf("http"), tmpUrl.LastIndexOf("\"") - tmpUrl.IndexOf("http"));
@@ -222,7 +228,7 @@ namespace Core.Searcher {
             Array.Copy(resArr, sReturn, resArr.Length);
             sReturn[resArr.Length] = txt;
             sReturn[resArr.Length + 1] = matchTitle;
-            sReturn[resArr.Length + 2] = matchValue.ToString();
+            //sReturn[resArr.Length + 2] = matchValue.ToString();
             return sReturn;
         }
 

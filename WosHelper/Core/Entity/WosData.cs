@@ -184,74 +184,75 @@ namespace Core.Entity {
         /// </summary>
         private string[] _dataArray;
 
-        public string[] dataArray {
-            get { return _dataArray; }
-            set {
-                _dataArray = value;
-                string[] datas = value;
-                this.PT = datas[0];
-                this.AU = datas[1];
-                this.BA = datas[2];
-                this.BE = datas[3];
-                this.GP = datas[4];
-                this.AF = datas[5];
-                this.BF = datas[6];
-                this.CA = datas[7];
-                this.TI = datas[8];
-                this.SO = datas[9];
-                this.SE = datas[10];
-                this.BS = datas[11];
-                this.LA = datas[12];
-                this.DT = datas[13];
-                this.CT = datas[14];
-                this.CY = datas[15];
-                this.CL = datas[16];
-                this.SP = datas[17];
-                this.HO = datas[18];
-                this.DE = datas[19];
-                this.ID = datas[20];
-                this.AB = datas[21];
-                this.C1 = datas[22];
-                this.RP = datas[23];
-                this.EM = datas[24];
-                this.RI = datas[25];
-                this.OI = datas[26];
-                this.FU = datas[27];
-                this.FX = datas[28];
-                this.CR = datas[29];
-                this.NR = datas[30];
-                this.TC = datas[31];
-                this.Z9 = datas[32];
-                this.U1 = datas[33];
-                this.U2 = datas[34];
-                this.PU = datas[35];
-                this.PI = datas[36];
-                this.PA = datas[37];
-                this.SN = datas[38];
-                this.EI = datas[39];
-                this.BN = datas[40];
-                this.J9 = datas[41];
-                this.JI = datas[42];
-                this.PD = datas[43];
-                this.PY = datas[44];
-                this.VL = datas[45];
-                this.IS = datas[46];
-                this.PN = datas[47];
-                this.SU = datas[48];
-                this.SI = datas[49];
-                this.MA = datas[50];
-                this.BP = datas[51];
-                this.EP = datas[52];
-                this.AR = datas[53];
-                this.DI = datas[54];
-                this.D2 = datas[55];
-                this.PG = datas[56];
-                this.WC = datas[57];
-                this.SC = datas[58];
-                this.GA = datas[59];
-                this.UT = datas[60];
-                this.PM = datas[61];
-            }
+        public string[] getDataArray() {
+            return _dataArray;
+        }
+
+        public void setDataArray(string[] datas) {
+            this.PT = datas[0];
+            this.AU = datas[1];
+            this.BA = datas[2];
+            this.BE = datas[3];
+            this.GP = datas[4];
+            this.AF = datas[5];
+            this.BF = datas[6];
+            this.CA = datas[7];
+            this.TI = datas[8];
+            this.SO = datas[9];
+            this.SE = datas[10];
+            this.BS = datas[11];
+            this.LA = datas[12];
+            this.DT = datas[13];
+            this.CT = datas[14];
+            this.CY = datas[15];
+            this.CL = datas[16];
+            this.SP = datas[17];
+            this.HO = datas[18];
+            this.DE = datas[19];
+            this.ID = datas[20];
+            this.AB = datas[21];
+            this.C1 = datas[22];
+            this.RP = datas[23];
+            this.EM = datas[24];
+            this.RI = datas[25];
+            this.OI = datas[26];
+            this.FU = datas[27];
+            this.FX = datas[28];
+            this.CR = datas[29];
+            this.NR = datas[30];
+            this.TC = datas[31];
+            this.Z9 = datas[32];
+            this.U1 = datas[33];
+            this.U2 = datas[34];
+            this.PU = datas[35];
+            this.PI = datas[36];
+            this.PA = datas[37];
+            this.SN = datas[38];
+            this.EI = datas[39];
+            this.BN = datas[40];
+            this.J9 = datas[41];
+            this.JI = datas[42];
+            this.PD = datas[43];
+            this.PY = datas[44];
+            this.VL = datas[45];
+            this.IS = datas[46];
+            this.PN = datas[47];
+            this.SU = datas[48];
+            this.SI = datas[49];
+            this.MA = datas[50];
+            this.BP = datas[51];
+            this.EP = datas[52];
+            this.AR = datas[53];
+            this.DI = datas[54];
+            this.D2 = datas[55];
+            this.PG = datas[56];
+            this.WC = datas[57];
+            this.SC = datas[58];
+            this.GA = datas[59];
+            this.UT = datas[60];
+            this.PM = datas[61];
+
+            _dataArray = datas;
         }
     }
 }
