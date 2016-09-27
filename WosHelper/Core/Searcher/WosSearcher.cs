@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Core.Entity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,6 +15,79 @@ namespace Core.Searcher {
         public string[] Search(string title, bool isCn) {
             return DownLoad(http, ref result, cookie, title, isCn);
         }
+
+        public WosData Search(string title) {
+            WosData wosData = new WosData();
+            string[] datas = Search(title, false);
+            wosData.dataArray = datas;
+            return wosData;
+        }
+
+        //private static void ToWosData(WosData wosData, string[] datas) {
+        //    wosData.PT = datas[0];
+        //    wosData.AU = datas[1];
+        //    wosData.BA = datas[2];
+        //    wosData.BE = datas[3];
+        //    wosData.GP = datas[4];
+        //    wosData.AF = datas[5];
+        //    wosData.BF = datas[6];
+        //    wosData.CA = datas[7];
+        //    wosData.TI = datas[8];
+        //    wosData.SO = datas[9];
+        //    wosData.SE = datas[10];
+        //    wosData.BS = datas[11];
+        //    wosData.LA = datas[12];
+        //    wosData.DT = datas[13];
+        //    wosData.CT = datas[14];
+        //    wosData.CY = datas[15];
+        //    wosData.CL = datas[16];
+        //    wosData.SP = datas[17];
+        //    wosData.HO = datas[18];
+        //    wosData.DE = datas[19];
+        //    wosData.ID = datas[20];
+        //    wosData.AB = datas[21];
+        //    wosData.C1 = datas[22];
+        //    wosData.RP = datas[23];
+        //    wosData.EM = datas[24];
+        //    wosData.RI = datas[25];
+        //    wosData.OI = datas[26];
+        //    wosData.FU = datas[27];
+        //    wosData.FX = datas[28];
+        //    wosData.CR = datas[29];
+        //    wosData.NR = datas[30];
+        //    wosData.TC = datas[31];
+        //    wosData.Z9 = datas[32];
+        //    wosData.U1 = datas[33];
+        //    wosData.U2 = datas[34];
+        //    wosData.PU = datas[35];
+        //    wosData.PI = datas[36];
+        //    wosData.PA = datas[37];
+        //    wosData.SN = datas[38];
+        //    wosData.EI = datas[39];
+        //    wosData.BN = datas[40];
+        //    wosData.J9 = datas[41];
+        //    wosData.JI = datas[42];
+        //    wosData.PD = datas[43];
+        //    wosData.PY = datas[44];
+        //    wosData.VL = datas[45];
+        //    wosData.IS = datas[46];
+        //    wosData.PN = datas[47];
+        //    wosData.SU = datas[48];
+        //    wosData.SI = datas[49];
+        //    wosData.MA = datas[50];
+        //    wosData.BP = datas[51];
+        //    wosData.EP = datas[52];
+        //    wosData.AR = datas[53];
+        //    wosData.DI = datas[54];
+        //    wosData.D2 = datas[55];
+        //    wosData.PG = datas[56];
+        //    wosData.WC = datas[57];
+        //    wosData.SC = datas[58];
+        //    wosData.GA = datas[59];
+        //    wosData.UT = datas[60];
+        //    wosData.PM = datas[61];
+        //    wosData.dataArray = datas;
+        //}
 
         public void InitHttp() {
             http = new HttpHelper();

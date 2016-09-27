@@ -1,0 +1,9 @@
+F:\Documents\GitHub\woscache\WosHelper\WosHelper\obj\Release\WosHelper.csprojResolveAssemblyReference.cache
+F:\Documents\GitHub\woscache\WosHelper\WosHelper\bin\WosHelper.dll.config
+F:\Documents\GitHub\woscache\WosHelper\WosHelper\bin\WosHelper.dll
+F:\Documents\GitHub\woscache\WosHelper\WosHelper\bin\WosHelper.pdb
+F:\Documents\GitHub\woscache\WosHelper\WosHelper\bin\Core.exe
+F:\Documents\GitHub\woscache\WosHelper\WosHelper\bin\MySql.Data.dll
+F:\Documents\GitHub\woscache\WosHelper\WosHelper\bin\Core.pdb
+F:\Documents\GitHub\woscache\WosHelper\WosHelper\obj\Release\WosHelper.dll
+F:\Documents\GitHub\woscache\WosHelper\WosHelper\obj\Release\WosHelper.pdb

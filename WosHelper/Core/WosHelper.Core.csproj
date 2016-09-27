@@ -43,8 +43,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DBConnector\MySqlCon.cs" />
+    <Compile Include="Entity\WosData.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SearcherTool.cs" />
     <Compile Include="Searcher\DBSearcher.cs" />
     <Compile Include="Searcher\HttpHelper.cs" />
     <Compile Include="Searcher\Utils.cs" />

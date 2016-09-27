@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WosHelper.Core", "Core\WosHelper.Core.csproj", "{19AF5B15-B151-4A0F-ACF9-1D8250FC8DD8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WosHelper", "WosHelper\WosHelper.csproj", "{EE4DA39C-1E82-4737-88DF-249C1C1680CB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{19AF5B15-B151-4A0F-ACF9-1D8250FC8DD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{19AF5B15-B151-4A0F-ACF9-1D8250FC8DD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{19AF5B15-B151-4A0F-ACF9-1D8250FC8DD8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE4DA39C-1E82-4737-88DF-249C1C1680CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE4DA39C-1E82-4737-88DF-249C1C1680CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE4DA39C-1E82-4737-88DF-249C1C1680CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE4DA39C-1E82-4737-88DF-249C1C1680CB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

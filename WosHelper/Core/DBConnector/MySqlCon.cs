@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using MySql.Data.MySqlClient;
+using Core.Entity;
 
 namespace Core.DBConnector {
     public class MySqlCon {
@@ -18,8 +19,14 @@ namespace Core.DBConnector {
                     adapter.Fill(dt);
                 }
             }
-
             return dt;
+        }
+
+        public static void SaveWosData(WosData wosData) {
+            string sql = "insert into wosdata values(";
+            if (wosData.dataArray != null) {
+
+            }
         }
         
     }
