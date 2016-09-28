@@ -8,6 +8,8 @@ using Core.Entity;
 namespace Core {
     public class SearcherTool {
 
+        public static double matchOk = 0.8;
+
         private WosSearcher wosSearcher;
         private DBSearcher dbSearcher;
 
@@ -15,6 +17,12 @@ namespace Core {
             wosSearcher = new WosSearcher();
             dbSearcher = new DBSearcher();
         }
+
+        private void ReadConfig() {
+            DBConnector.MySqlCon.ConnectString = System.Configuration.ConfigurationManager.AppSettings["ConnectString"];
+            double.TryParse(System.Configuration.ConfigurationManager.AppSettings["matchok"], out matchOk);
+        }
+
         public WosData Search(string title) {
             WosData wosData = dbSearcher.Search(title);
             if (wosData != null) {

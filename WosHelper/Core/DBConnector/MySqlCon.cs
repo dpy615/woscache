@@ -8,7 +8,7 @@ using Core.Entity;
 
 namespace Core.DBConnector {
     public class MySqlCon {
-        private static string ConnectString = "Server=192.168.139.131;Database=woscache; User=wos;Password=wos;Use Procedure Bodies=false;Charset=utf8;Allow Zero Datetime=True; Pooling=false; Max Pool Size=50;";
+        public static string ConnectString = "Server=192.168.139.131;Database=woscache; User=wos;Password=wos;Use Procedure Bodies=false;Charset=utf8;Allow Zero Datetime=True; Pooling=false; Max Pool Size=50;";
 
         public static DataTable ExecSql(string sql) {
             DataTable dt = new DataTable();
