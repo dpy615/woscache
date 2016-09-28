@@ -7,3 +7,12 @@ F:\Documents\GitHub\woscache\WosHelper\WosHelper\bin\Core.pdb
 F:\Documents\GitHub\woscache\WosHelper\WosHelper\obj\Debug\WosHelper.dll
 F:\Documents\GitHub\woscache\WosHelper\WosHelper\obj\Debug\WosHelper.pdb
 F:\Documents\GitHub\woscache\WosHelper\WosHelper\obj\Debug\WosHelper.csprojResolveAssemblyReference.cache
+C:\Users\Administrator\Desktop\WosHelper\WosHelper\WosHelper\bin\WosHelper.dll.config
+C:\Users\Administrator\Desktop\WosHelper\WosHelper\WosHelper\bin\WosHelper.dll
+C:\Users\Administrator\Desktop\WosHelper\WosHelper\WosHelper\bin\WosHelper.pdb
+C:\Users\Administrator\Desktop\WosHelper\WosHelper\WosHelper\bin\Core.exe
+C:\Users\Administrator\Desktop\WosHelper\WosHelper\WosHelper\bin\MySql.Data.dll
+C:\Users\Administrator\Desktop\WosHelper\WosHelper\WosHelper\bin\Core.pdb
+C:\Users\Administrator\Desktop\WosHelper\WosHelper\WosHelper\obj\Debug\WosHelper.csprojResolveAssemblyReference.cache
+C:\Users\Administrator\Desktop\WosHelper\WosHelper\WosHelper\obj\Debug\WosHelper.dll
+C:\Users\Administrator\Desktop\WosHelper\WosHelper\WosHelper\obj\Debug\WosHelper.pdb

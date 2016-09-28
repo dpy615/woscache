@@ -28,5 +28,11 @@ namespace WosHelper {
             WosData wosData = searcher.Search(title, year);
             return wosData;
         }
+
+
+        [WebMethod]
+        public string GetConnectString() {
+            return SearcherTool.ConnectString;
+        }
     }
 }

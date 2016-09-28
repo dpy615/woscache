@@ -13,6 +13,7 @@ namespace Core.Searcher {
         HttpResult result;
         string cookie;
         public string[] Search(string title, bool isCn) {
+            http = new HttpHelper();
             this.InitHttp();
             return DownLoad(http, ref result, cookie, title, isCn);
         }
@@ -228,7 +229,7 @@ namespace Core.Searcher {
             Array.Copy(resArr, sReturn, resArr.Length);
             sReturn[resArr.Length] = txt;
             sReturn[resArr.Length + 1] = matchTitle;
-            //sReturn[resArr.Length + 2] = matchValue.ToString();
+            sReturn[resArr.Length + 2] = matchValue.ToString();
             return sReturn;
         }
 
