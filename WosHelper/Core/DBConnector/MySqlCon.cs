@@ -30,10 +30,14 @@ namespace Core.DBConnector {
         }
 
         public static void SaveWosData(WosData wosData) {
-            string sql = "insert into wosdata(PT,AU,BA,BE,GP,AF,BF,CA,TI,SO,SE,BS,LA,DT,CT,CY,CL,SP,HO,DE,ID,AB,C1,RP,EM,RI,OI,FU,FX,CR,NR,TC,Z9,U1,U2,PU,PI,PA,SN,EI,BN,J9,JI,PD,PY,VL,`IS`,PN,SU,SI,MA,BP,EP,AR,DI,D2,PG,WC,SC,GA,UT,PM) values(";
-            sql += GetInsertStr(wosData);
-            sql += ")";
-            ExecInsert(sql);
+            try {
+                string sql = "insert into wosdata(PT,AU,BA,BE,GP,AF,BF,CA,TI,SO,SE,BS,LA,DT,CT,CY,CL,SP,HO,DE,ID,AB,C1,RP,EM,RI,OI,FU,FX,CR,NR,TC,Z9,U1,U2,PU,PI,PA,SN,EI,BN,J9,JI,PD,PY,VL,`IS`,PN,SU,SI,MA,BP,EP,AR,DI,D2,PG,WC,SC,GA,UT,PM) values(";
+                sql += GetInsertStr(wosData);
+                sql += ")";
+                ExecInsert(sql);
+            } catch (Exception) {
+
+            }
         }
 
         public static string GetInsertStr(WosData wosData) {
@@ -41,7 +45,7 @@ namespace Core.DBConnector {
             string sReturn = "'";
             for (int i = 0; i < 62; i++) {
                 if (i != 61) {
-                    sReturn += datas[i].Replace("'","\\'").Replace("\"","\\\"") + "','";
+                    sReturn += datas[i].Replace("'", "\\'").Replace("\"", "\\\"") + "','";
                 } else {
                     sReturn += datas[i].Replace("'", "\\'").Replace("\"", "\\\"") + "'";
                 }
@@ -51,12 +55,16 @@ namespace Core.DBConnector {
 
 
         public static void SaveMatchData(WosData wosData, string title) {
-            string sql = string.Format("insert into titlematch values('{0}','{1}','{2}','{3}')",
-                title,
-                wosData.UT,
-                wosData.getDataArray()[wosData.getDataArray().Length-1],
-                "");
-            ExecInsert(sql);
+            try {
+                string sql = string.Format("insert into titlematch values('{0}','{1}','{2}','{3}')",
+               title,
+               wosData.UT,
+               wosData.getDataArray()[wosData.getDataArray().Length - 1],
+               "");
+                ExecInsert(sql);
+            } catch (Exception) {
+            }
+
         }
     }
 }

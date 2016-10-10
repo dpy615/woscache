@@ -42,13 +42,13 @@ namespace WosHelper {
 
         [WebMethod(Description = "通过标题来检索（仅检索数据库中内容）")]
         public WosData SearchByTitleDB(string title) {
-            WosData wosData = searcher.Search(title);
+            WosData wosData = searcher.SearchDB(title);
             return wosData;
         }
 
         [WebMethod(Description = "通过标题来检索（不检索数据库）")]
         public WosData SearchByTitleNoDB(string title) {
-            WosData wosData = searcher.Search(title);
+            WosData wosData = searcher.SearchWos(title);
             return wosData;
         }
 
@@ -56,9 +56,9 @@ namespace WosHelper {
         public WosData SearchByTitleAndYearNoDB(string title, string year) {
             WosData wosData = null;
             if (string.IsNullOrEmpty(year)) {
-                wosData = searcher.Search(title);
+                wosData = searcher.SearchWos(title);
             } else {
-                wosData = searcher.Search(title, year);
+                wosData = searcher.SearchWos(title, year);
             }
             return wosData;
         }

@@ -21,4 +21,3 @@ F:\Documents\GitHub\woscache\WosHelper\Core\bin\Debug\Core.exe.manifest
 F:\Documents\GitHub\woscache\WosHelper\Core\bin\Debug\Core.application
 F:\Documents\GitHub\woscache\WosHelper\Core\obj\Debug\Core.exe.manifest
 F:\Documents\GitHub\woscache\WosHelper\Core\obj\Debug\Core.application
-F:\Documents\GitHub\woscache\WosHelper\Core\obj\Debug\WosHelper.Core.csprojResolveAssemblyReference.cache
