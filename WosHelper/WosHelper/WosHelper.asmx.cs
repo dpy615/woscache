@@ -17,22 +17,50 @@ namespace WosHelper {
     // [System.Web.Script.Services.ScriptService]
     public class WosHelper : System.Web.Services.WebService {
         SearcherTool searcher = new SearcherTool();
-        [WebMethod]
+        [WebMethod(Description = "通过标题来检索")]
         public WosData SearchByTitle(string title) {
             WosData wosData = searcher.Search(title);
             return wosData;
         }
 
-        [WebMethod]
+        [WebMethod(Description = "通过标题和出版年来检索")]
         public WosData SearchByTitleAndYear(string title, string year) {
-            WosData wosData = searcher.Search(title, year);
+            WosData wosData = null;
+            if (string.IsNullOrEmpty(year)) {
+                wosData = searcher.Search(title);
+            } else {
+                wosData = searcher.Search(title, year);
+            }
             return wosData;
         }
 
 
-        [WebMethod]
+        [WebMethod(Description = "获取当前系统的数据库连接字符串")]
         public string GetConnectString() {
             return SearcherTool.ConnectString;
+        }
+
+        [WebMethod(Description = "通过标题来检索（仅检索数据库中内容）")]
+        public WosData SearchByTitleDB(string title) {
+            WosData wosData = searcher.Search(title);
+            return wosData;
+        }
+
+        [WebMethod(Description = "通过标题来检索（不检索数据库）")]
+        public WosData SearchByTitleNoDB(string title) {
+            WosData wosData = searcher.Search(title);
+            return wosData;
+        }
+
+        [WebMethod(Description = "通过标题和出版年来检索（不检索数据库）")]
+        public WosData SearchByTitleAndYearNoDB(string title, string year) {
+            WosData wosData = null;
+            if (string.IsNullOrEmpty(year)) {
+                wosData = searcher.Search(title);
+            } else {
+                wosData = searcher.Search(title, year);
+            }
+            return wosData;
         }
     }
 }

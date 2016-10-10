@@ -17,3 +17,8 @@ C:\Users\Administrator\Desktop\WosHelper\WosHelper\Core\obj\Debug\Core.pdb
 C:\Users\Administrator\Desktop\WosHelper\WosHelper\Core\bin\Debug\Core.exe
 C:\Users\Administrator\Desktop\WosHelper\WosHelper\Core\bin\Debug\Core.pdb
 C:\Users\Administrator\Desktop\WosHelper\WosHelper\Core\bin\Debug\mysql.data.dll
+F:\Documents\GitHub\woscache\WosHelper\Core\bin\Debug\Core.exe.manifest
+F:\Documents\GitHub\woscache\WosHelper\Core\bin\Debug\Core.application
+F:\Documents\GitHub\woscache\WosHelper\Core\obj\Debug\Core.exe.manifest
+F:\Documents\GitHub\woscache\WosHelper\Core\obj\Debug\Core.application
+F:\Documents\GitHub\woscache\WosHelper\Core\obj\Debug\WosHelper.Core.csprojResolveAssemblyReference.cache

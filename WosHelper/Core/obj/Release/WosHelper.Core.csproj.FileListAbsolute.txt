@@ -12,3 +12,7 @@ C:\Users\Administrator\Desktop\WosHelper\WosHelper\Core\bin\Release\mysql.data.d
 C:\Users\Administrator\Desktop\WosHelper\WosHelper\Core\obj\Release\WosHelper.Core.csprojResolveAssemblyReference.cache
 C:\Users\Administrator\Desktop\WosHelper\WosHelper\Core\obj\Release\Core.exe
 C:\Users\Administrator\Desktop\WosHelper\WosHelper\Core\obj\Release\Core.pdb
+F:\Documents\GitHub\woscache\WosHelper\Core\bin\Release\Core.exe.manifest
+F:\Documents\GitHub\woscache\WosHelper\Core\bin\Release\Core.application
+F:\Documents\GitHub\woscache\WosHelper\Core\obj\Release\Core.exe.manifest
+F:\Documents\GitHub\woscache\WosHelper\Core\obj\Release\Core.application
