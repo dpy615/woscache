@@ -6,9 +6,10 @@ using System.Data;
 namespace Core {
     class Program {
         static void Main(string[] args) {
-            string sql = "select * From wosdata";
-            DataTable dt = MySqlCon.ExecSql(sql);
-            Console.WriteLine(dt.Rows.Count);
+
+            MySqlCon.CheckWosData();
+            MySqlCon.CheckTitleMatch();
+            Console.WriteLine("dfd");
             Console.Read();
         }
     }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Core.Searcher;
 using Core.Entity;
+using Core.DBConnector;
 
 namespace Core {
     public class SearcherTool {
@@ -22,8 +23,38 @@ namespace Core {
         private void ReadConfig() {
             ConnectString = System.Configuration.ConfigurationManager.AppSettings["ConnectString"];
             double.TryParse(System.Configuration.ConfigurationManager.AppSettings["matchok"], out matchOk);
+            MySqlCon.CheckTables();
         }
 
+        /// <summary>
+        /// 对一个数据库中的数据进行检索，并入库
+        /// </summary>
+        /// <param name="titles"></param>
+        public void SearchDataToDb(string[] titles) {
+            try {
+                wosSearcher.InitHttp();
+                foreach (string title in titles) {
+                    WosData wosData = wosSearcher.Search(title);
+                    if (wosData != null) {
+                        double matchTmp = 0;
+                        string[] rdatas = wosData.getDataArray();
+                        double.TryParse(rdatas[rdatas.Length - 1], out matchTmp);
+                        if (matchTmp >= matchOk) {
+                            try {
+                                DBConnector.MySqlCon.SaveWosData(wosData);
+                            } catch (Exception) {
+                                DBConnector.MySqlCon.SaveMatchData(wosData, title);
+                            }
+                        } else {
+                            wosData = null;
+                        }
+                    }
+                }
+            } catch (Exception e) {
+                Logs.WriteLog("SearchDataToDb Error:" + e.Message);
+            }
+
+        }
 
         /// <summary>
         /// 只检索数据库
@@ -140,6 +171,8 @@ namespace Core {
             }
             return wosData;
         }
+
+
 
     }
 }

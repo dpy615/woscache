@@ -1,0 +1,10 @@
+F:\Documents\GitHub\woscache\WosHelper\WosHelperServices\bin\Debug\WosHelperServices.exe
+F:\Documents\GitHub\woscache\WosHelper\WosHelperServices\bin\Debug\WosHelperServices.pdb
+F:\Documents\GitHub\woscache\WosHelper\WosHelperServices\bin\Debug\Core.exe
+F:\Documents\GitHub\woscache\WosHelper\WosHelperServices\bin\Debug\MySql.Data.dll
+F:\Documents\GitHub\woscache\WosHelper\WosHelperServices\bin\Debug\Core.pdb
+F:\Documents\GitHub\woscache\WosHelper\WosHelperServices\obj\Debug\WosHelperServices.csprojResolveAssemblyReference.cache
+F:\Documents\GitHub\woscache\WosHelper\WosHelperServices\obj\Debug\WosHelperServices.ProjectInstaller.resources
+F:\Documents\GitHub\woscache\WosHelper\WosHelperServices\obj\Debug\WosHelperServices.csproj.GenerateResource.Cache
+F:\Documents\GitHub\woscache\WosHelper\WosHelperServices\obj\Debug\WosHelperServices.exe
+F:\Documents\GitHub\woscache\WosHelper\WosHelperServices\obj\Debug\WosHelperServices.pdb

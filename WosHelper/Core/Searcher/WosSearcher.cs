@@ -33,6 +33,7 @@ namespace Core.Searcher {
             wosData.setDataArray(datas);
             return wosData;
         }
+
         public WosData Search(string title, string year) {
             WosData wosData = new WosData();
             string[] datas = Search(title, year, false);
@@ -40,6 +41,26 @@ namespace Core.Searcher {
                 return null;
             }
             wosData.setDataArray(datas);
+            return wosData;
+        }
+
+        /// <summary>
+        /// 不进行初始化读取数据，该方法用于同一个会话进行多个操作，在调用该方法之前必须调用initHttp
+        /// </summary>
+        /// <param name="title"></param>
+        /// <returns></returns>
+        public WosData SearchNoInit(string title) {
+            WosData wosData = new WosData();
+            try {
+                string[] datas = DownLoad(http, ref result, cookie, title, false);
+                if (datas == null) {
+                    return null;
+                }
+                wosData.setDataArray(datas);
+            } catch (Exception e) {
+                Logs.WriteLog(e.ToString());
+            }
+
             return wosData;
         }
 
