@@ -1,0 +1,2 @@
+21:47:04	不支持关键字: “database”。
+select * from de_reference where INTERNAL_ID>=1 and INTERNAL_ID<500 order by INTERNAL_ID

@@ -15,7 +15,7 @@ namespace Core {
             FileName = "logs\\" + FileName + ".txt";
             lock (_logLocker) {
                 using (StreamWriter sw = new StreamWriter(FileName, true)) {
-                    sw.WriteLine(string.Format("{0}\t{1}", DateTime.Now.ToString("HH:mm:ss"), str));
+                    sw.WriteLine(string.Format("{0}\t{1}\r\n", DateTime.Now.ToString("HH:mm:ss"), str));
                     sw.Flush();
                 }
             }

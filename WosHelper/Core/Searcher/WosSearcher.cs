@@ -59,6 +59,7 @@ namespace Core.Searcher {
                 wosData.setDataArray(datas);
             } catch (Exception e) {
                 Logs.WriteLog(e.ToString());
+                throw e;
             }
 
             return wosData;

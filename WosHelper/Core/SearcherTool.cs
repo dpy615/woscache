@@ -5,52 +5,167 @@ using System.Text;
 using Core.Searcher;
 using Core.Entity;
 using Core.DBConnector;
+using System.Threading;
+using System.Data;
+using System.Configuration;
 
-namespace Core {
-    public class SearcherTool {
+namespace Core
+{
+    public class SearcherTool
+    {
 
+        /// <summary>
+        /// 匹配值阈值
+        /// </summary>
         public static double matchOk = 0.8;
+        /// <summary>
+        /// 连接字符串
+        /// </summary>
         public static string ConnectString = string.Empty;
+        public static int nowIndex = 0;
         private WosSearcher wosSearcher;
         private DBSearcher dbSearcher;
+        private Thread searchThread;
 
-        public SearcherTool() {
+        public bool bRunFlg = false;
+
+        public SearcherTool()
+        {
             wosSearcher = new WosSearcher();
             dbSearcher = new DBSearcher();
             ReadConfig();
         }
 
-        private void ReadConfig() {
+        private void ReadConfig()
+        {
             ConnectString = System.Configuration.ConfigurationManager.AppSettings["ConnectString"];
             double.TryParse(System.Configuration.ConfigurationManager.AppSettings["matchok"], out matchOk);
-            MySqlCon.CheckTables();
+            int.TryParse(System.Configuration.ConfigurationManager.AppSettings["titleIndex"], out nowIndex);
+            // MySqlCon.CheckTables();
         }
+
+        private void SetTitleIndex(string index)
+        {
+            Configuration config = System.Configuration.ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            config.AppSettings.Settings["titleIndex"].Value = index;
+            config.Save();
+        }
+
+        public void start()
+        {
+            bRunFlg = true;
+            searchThread = new Thread(new ThreadStart(StartThread));
+            searchThread.Start();
+        }
+
+        public void stop()
+        {
+            bRunFlg = false;
+        }
+
+        private void StartThread()
+        {
+            while (bRunFlg)
+            {
+                int start = nowIndex + 1;
+                int end = nowIndex + 500;
+                SearchDataToOracle(start, end);
+                Thread.Sleep(1000 * 10);
+            }
+        }
+
+
+        /// <summary>
+        /// 检索数据并保存到oracle库中
+        /// </summary>
+        /// <param name="start"></param>
+        /// <param name="end"></param>
+        public void SearchDataToOracle(int start, int end)
+        {
+            DataTable dt_articles = OracleCon.SelectArticles(start, end);
+            try
+            {
+                wosSearcher.InitHttp();
+            }
+            catch (Exception e)
+            {
+                Logs.WriteLog(string.Format("{0}\r\n{1}", e.Message, "初始化会话失败，请检查网络连接"));
+                return;
+            }
+            try
+            {
+                foreach (DataRow row in dt_articles.Rows)
+                {
+                    string title = row["CITATION_SOURCE_TITLE"].ToString();
+                    string id = row["INTERNAL_ID"].ToString();
+                    int.TryParse(id, out nowIndex);
+
+                    WosData wosData = wosSearcher.SearchNoInit(title);
+                    if (wosData != null)
+                    {
+                        double matchTmp = 0;
+                        string[] rdatas = wosData.getDataArray();
+                        double.TryParse(rdatas[rdatas.Length - 1], out matchTmp);
+                        if (matchTmp >= matchOk)
+                        {
+                            try
+                            {
+                                DBConnector.OracleCon.SaveWosData(wosData);
+                            }
+                            catch (Exception)
+                            {
+                                DBConnector.OracleCon.SaveMatchData(wosData, title, id);
+                            }
+                        }
+                        SetTitleIndex(id);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                return;
+            }
+
+        }
+
 
         /// <summary>
         /// 对一个数据库中的数据进行检索，并入库
         /// </summary>
         /// <param name="titles"></param>
-        public void SearchDataToDb(string[] titles) {
-            try {
+        public void SearchDataToDb(string[] titles)
+        {
+            try
+            {
                 wosSearcher.InitHttp();
-                foreach (string title in titles) {
+                foreach (string title in titles)
+                {
                     WosData wosData = wosSearcher.Search(title);
-                    if (wosData != null) {
+                    if (wosData != null)
+                    {
                         double matchTmp = 0;
                         string[] rdatas = wosData.getDataArray();
                         double.TryParse(rdatas[rdatas.Length - 1], out matchTmp);
-                        if (matchTmp >= matchOk) {
-                            try {
+                        if (matchTmp >= matchOk)
+                        {
+                            try
+                            {
                                 DBConnector.MySqlCon.SaveWosData(wosData);
-                            } catch (Exception) {
+                            }
+                            catch (Exception)
+                            {
                                 DBConnector.MySqlCon.SaveMatchData(wosData, title);
                             }
-                        } else {
+                        }
+                        else
+                        {
                             wosData = null;
                         }
                     }
                 }
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 Logs.WriteLog("SearchDataToDb Error:" + e.Message);
             }
 
@@ -61,7 +176,8 @@ namespace Core {
         /// </summary>
         /// <param name="title"></param>
         /// <returns></returns>
-        public WosData SearchDB(string title) {
+        public WosData SearchDB(string title)
+        {
             WosData wosData = dbSearcher.Search(title);
             return wosData;
         }
@@ -71,19 +187,27 @@ namespace Core {
         /// </summary>
         /// <param name="title"></param>
         /// <returns></returns>
-        public WosData SearchWos(string title) {
+        public WosData SearchWos(string title)
+        {
             WosData wosData = wosSearcher.Search(title);
-            if (wosData != null) {
+            if (wosData != null)
+            {
                 double matchTmp = 0;
                 string[] rdatas = wosData.getDataArray();
                 double.TryParse(rdatas[rdatas.Length - 1], out matchTmp);
-                if (matchTmp >= matchOk) {
-                    try {
+                if (matchTmp >= matchOk)
+                {
+                    try
+                    {
                         DBConnector.MySqlCon.SaveWosData(wosData);
-                    } catch (Exception) {
+                    }
+                    catch (Exception)
+                    {
                         DBConnector.MySqlCon.SaveMatchData(wosData, title);
                     }
-                } else {
+                }
+                else
+                {
                     wosData = null;
                 }
             }
@@ -95,19 +219,27 @@ namespace Core {
         /// </summary>
         /// <param name="title"></param>
         /// <returns></returns>
-        public WosData SearchWos(string title, string year) {
+        public WosData SearchWos(string title, string year)
+        {
             WosData wosData = wosSearcher.Search(title, year);
-            if (wosData != null) {
+            if (wosData != null)
+            {
                 double matchTmp = 0;
                 string[] rdatas = wosData.getDataArray();
                 double.TryParse(rdatas[rdatas.Length - 1], out matchTmp);
-                if (matchTmp >= matchOk) {
-                    try {
+                if (matchTmp >= matchOk)
+                {
+                    try
+                    {
                         DBConnector.MySqlCon.SaveWosData(wosData);
-                    } catch (Exception) {
+                    }
+                    catch (Exception)
+                    {
                         DBConnector.MySqlCon.SaveMatchData(wosData, title);
                     }
-                } else {
+                }
+                else
+                {
                     wosData = null;
                 }
             }
@@ -120,23 +252,32 @@ namespace Core {
         /// </summary>
         /// <param name="title"></param>
         /// <returns></returns>
-        public WosData Search(string title) {
+        public WosData Search(string title)
+        {
             WosData wosData = dbSearcher.Search(title);
-            if (wosData != null) {
+            if (wosData != null)
+            {
                 return wosData;
             }
             wosData = wosSearcher.Search(title);
-            if (wosData != null) {
+            if (wosData != null)
+            {
                 double matchTmp = 0;
                 string[] rdatas = wosData.getDataArray();
                 double.TryParse(rdatas[rdatas.Length - 1], out matchTmp);
-                if (matchTmp >= matchOk) {
-                    try {
+                if (matchTmp >= matchOk)
+                {
+                    try
+                    {
                         DBConnector.MySqlCon.SaveWosData(wosData);
-                    } catch (Exception) {
+                    }
+                    catch (Exception)
+                    {
                         DBConnector.MySqlCon.SaveMatchData(wosData, title);
                     }
-                } else {
+                }
+                else
+                {
                     wosData = null;
                 }
             }
@@ -149,23 +290,32 @@ namespace Core {
         /// <param name="title"></param>
         /// <param name="year"></param>
         /// <returns></returns>
-        public WosData Search(string title, string year) {
+        public WosData Search(string title, string year)
+        {
             WosData wosData = dbSearcher.Search(title);
-            if (wosData != null) {
+            if (wosData != null)
+            {
                 return wosData;
             }
             wosData = wosSearcher.Search(title, year);
-            if (wosData != null) {
+            if (wosData != null)
+            {
                 double matchTmp = 0;
                 string[] rdatas = wosData.getDataArray();
                 double.TryParse(rdatas[rdatas.Length - 1], out matchTmp);
-                if (matchTmp >= matchOk) {
-                    try {
+                if (matchTmp >= matchOk)
+                {
+                    try
+                    {
                         DBConnector.MySqlCon.SaveWosData(wosData);
-                    } catch (Exception) {
+                    }
+                    catch (Exception)
+                    {
                         DBConnector.MySqlCon.SaveMatchData(wosData, title);
                     }
-                } else {
+                }
+                else
+                {
                     wosData = null;
                 }
             }

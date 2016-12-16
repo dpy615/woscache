@@ -42,14 +42,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Core.exe" size="42928">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Core.exe" size="50096">
       <assemblyIdentity name="Core" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>SnDtcFWSKg2eolWCOWDKCgyvCsU=</dsig:DigestValue>
+        <dsig:DigestValue>jV5TgYTZqgrGY79nAHI0YAYYrkQ=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -65,13 +65,13 @@
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="Core.exe.config" size="175">
+  <file name="Core.exe.config" size="443">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>geExAa7x7f/mROkUPIdw48aQxS4=</dsig:DigestValue>
+      <dsig:DigestValue>wpUDd84p907ZO4FW+sUi0367B8g=</dsig:DigestValue>
     </hash>
   </file>
   <file name="FileImport\mysql.data.dll" size="411648">

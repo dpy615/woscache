@@ -1,24 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
-using System.Linq;
+﻿using Core;
+using System;
 using System.ServiceProcess;
-using System.Text;
 
-namespace WosHelperServices {
+namespace WosHelperServices
+{
     partial class WosHelperSer : ServiceBase {
+        SearcherTool tool;
         public WosHelperSer() {
             InitializeComponent();
         }
 
-        protected override void OnStart(string[] args) {
-            // TODO: Add code here to start your service.
+        public void start()
+        {
+            tool = new SearcherTool();
+            tool.start();
         }
 
-        protected override void OnStop() {
-            // TODO: Add code here to perform any tear-down necessary to stop your service.
+        protected override void OnStart(string[] args) {
+            tool = new SearcherTool();
+            tool.start();
+        }
+
+        protected override void OnStop()
+        {
+            if (tool != null)
+            {
+                tool.stop();
+            }
         }
     }
 }
