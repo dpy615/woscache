@@ -16,3 +16,12 @@ F:\Documents\GitHub\woscache\WosHelper\WosHelper\bin\Core.pdb
 F:\Documents\GitHub\woscache\WosHelper\WosHelper\obj\Debug\WosHelper.csprojResolveAssemblyReference.cache
 F:\Documents\GitHub\woscache\WosHelper\WosHelper\obj\Debug\WosHelper.dll
 F:\Documents\GitHub\woscache\WosHelper\WosHelper\obj\Debug\WosHelper.pdb
+C:\Users\Administrator\Documents\GitHub\woscache\WosHelper\WosHelper\bin\WosHelper.dll.config
+C:\Users\Administrator\Documents\GitHub\woscache\WosHelper\WosHelper\bin\WosHelper.dll
+C:\Users\Administrator\Documents\GitHub\woscache\WosHelper\WosHelper\bin\WosHelper.pdb
+C:\Users\Administrator\Documents\GitHub\woscache\WosHelper\WosHelper\bin\Core.dll
+C:\Users\Administrator\Documents\GitHub\woscache\WosHelper\WosHelper\bin\MySql.Data.dll
+C:\Users\Administrator\Documents\GitHub\woscache\WosHelper\WosHelper\bin\Core.pdb
+C:\Users\Administrator\Documents\GitHub\woscache\WosHelper\WosHelper\obj\Debug\WosHelper.csprojResolveAssemblyReference.cache
+C:\Users\Administrator\Documents\GitHub\woscache\WosHelper\WosHelper\obj\Debug\WosHelper.dll
+C:\Users\Administrator\Documents\GitHub\woscache\WosHelper\WosHelper\obj\Debug\WosHelper.pdb

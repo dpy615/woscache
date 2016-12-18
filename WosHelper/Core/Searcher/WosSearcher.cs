@@ -6,12 +6,17 @@ using System.Text;
 using System.Text.RegularExpressions;
 
 namespace Core.Searcher {
+
     public class WosSearcher {
         string jessionID = "";
         string sID = "";
         HttpHelper http = null;
         HttpResult result;
         string cookie;
+
+        int searchCount = 0;
+        public bool isbusy = false;
+
         public string[] Search(string title, bool isCn) {
             http = new HttpHelper();
             this.InitHttp();
@@ -43,13 +48,13 @@ namespace Core.Searcher {
             wosData.setDataArray(datas);
             return wosData;
         }
-
         /// <summary>
         /// 不进行初始化读取数据，该方法用于同一个会话进行多个操作，在调用该方法之前必须调用initHttp
         /// </summary>
         /// <param name="title"></param>
         /// <returns></returns>
         public WosData SearchNoInit(string title) {
+            isbusy = true;
             WosData wosData = new WosData();
             try {
                 string[] datas = DownLoad(http, ref result, cookie, title, false);
@@ -61,12 +66,19 @@ namespace Core.Searcher {
                 Logs.WriteLog(e.ToString());
                 throw e;
             }
-
+            searchCount++;
+            if (searchCount > 30) {
+                this.InitHttp();
+            }
+            isbusy = false;
             return wosData;
         }
 
 
         public void InitHttp() {
+            if (http == null) {
+                http = new HttpHelper();
+            }
             HttpItem item = new HttpItem() {
                 URL = "http://apps.webofknowledge.com/",//URL     必需项    
                 Method = "get",//URL     可选项 默认为Get   

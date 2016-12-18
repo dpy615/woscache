@@ -17,3 +17,9 @@ F:\Documents\GitHub\woscache\WosHelper\Core\bin\Debug\mysql.data.dll
 F:\Documents\GitHub\woscache\WosHelper\Core\bin\Debug\Core.dll.config
 F:\Documents\GitHub\woscache\WosHelper\Core\bin\Debug\Core.dll
 F:\Documents\GitHub\woscache\WosHelper\Core\obj\Debug\Core.dll
+C:\Users\Administrator\Documents\GitHub\woscache\WosHelper\Core\obj\Debug\Core.dll
+C:\Users\Administrator\Documents\GitHub\woscache\WosHelper\Core\obj\Debug\Core.pdb
+C:\Users\Administrator\Documents\GitHub\woscache\WosHelper\Core\bin\Debug\Core.dll.config
+C:\Users\Administrator\Documents\GitHub\woscache\WosHelper\Core\bin\Debug\Core.dll
+C:\Users\Administrator\Documents\GitHub\woscache\WosHelper\Core\bin\Debug\Core.pdb
+C:\Users\Administrator\Documents\GitHub\woscache\WosHelper\Core\bin\Debug\mysql.data.dll

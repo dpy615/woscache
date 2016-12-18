@@ -9,8 +9,6 @@ namespace Core {
     class Program {
         static void Main(string[] args) {
 
-            SearcherTool tool = new SearcherTool();
-            tool.start();
             Console.WriteLine("dfd");
             Console.Read();
         }
