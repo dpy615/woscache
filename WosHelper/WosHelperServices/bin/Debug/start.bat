@@ -1,0 +1,2 @@
+WosHelperServices.exe -d
+pause

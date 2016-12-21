@@ -66,7 +66,7 @@ namespace Core.DBConnector {
             string sql = string.Empty;
             try {
                 sql = string.Format("insert into wos_match(title_id,title,ut,titlematchvalue,yearmatch) values({0},'{1}','{2}','{3}','{4}')",
-               id, title,
+               id, title.Replace("'","''"),
                wosData.UT,
                wosData.getDataArray()[wosData.getDataArray().Length - 1],
                "-1");

@@ -14,7 +14,7 @@ namespace Core.Searcher {
         HttpResult result;
         string cookie;
 
-        int searchCount = 0;
+        int searchCount = -1;
         public bool isbusy = false;
 
         public string[] Search(string title, bool isCn) {
@@ -54,7 +54,14 @@ namespace Core.Searcher {
         /// <param name="title"></param>
         /// <returns></returns>
         public WosData SearchNoInit(string title) {
-            isbusy = true;
+            if (searchCount == -1) {
+                this.InitHttp();
+            }
+            searchCount++;
+            if (searchCount > 30) {
+                this.InitHttp();
+                searchCount = 0;
+            }
             WosData wosData = new WosData();
             try {
                 string[] datas = DownLoad(http, ref result, cookie, title, false);
@@ -66,11 +73,7 @@ namespace Core.Searcher {
                 Logs.WriteLog(e.ToString());
                 throw e;
             }
-            searchCount++;
-            if (searchCount > 30) {
-                this.InitHttp();
-            }
-            isbusy = false;
+            
             return wosData;
         }
 

@@ -31,12 +31,13 @@ namespace Core {
 
 
         public SearcherTool() {
+            ReadConfig();
             for (int i = 0; i < threadCount; i++) {
                 WosSearcher searcher = new WosSearcher();
                 searchers.Add(searcher);
             }
             dbSearcher = new DBSearcher();
-            ReadConfig();
+            
         }
 
         private void ReadConfig() {
@@ -50,6 +51,7 @@ namespace Core {
         private void SetTitleIndex(string index) {
             lock (searchers) {
                 if (int.Parse(index) >= nowIndex) {
+                    nowIndex = int.Parse(index);
                     File.WriteAllText("titleIndex.cfg", index);
                 }
             }
@@ -105,6 +107,8 @@ namespace Core {
                             if (!searchers[i].isbusy) {
                                 tmpSearcher = searchers[i];
                                 GetSearcher = true;
+                                tmpSearcher.isbusy = true;
+                                break;
                             }
                         }
                     }
@@ -140,6 +144,8 @@ namespace Core {
                 }
             } catch (Exception e) {
                 OracleCon.SaveMatchDataError(title, id, e.Message);
+            } finally {
+                tmpSearcher.isbusy = false;
             }
             SetTitleIndex(id);
         }
