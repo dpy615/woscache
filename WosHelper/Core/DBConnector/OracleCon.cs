@@ -25,7 +25,7 @@ namespace Core.DBConnector {
         /// </summary>
         /// <param name="sql"></param>
         /// <returns></returns>
-        private static DataTable ExecuteSelect(string sql) {
+        public static DataTable ExecuteSelect(string sql) {
             DataTable dt = new DataTable();
             try {
                 using (OracleConnection connection = new OracleConnection(SearcherTool.ConnectString)) {
@@ -76,6 +76,26 @@ namespace Core.DBConnector {
                 throw e;
             }
         }
+
+        internal static void SaveMatchData(string UT, string title, string id,string matchValue)
+        {
+            string sql = string.Empty;
+            try
+            {
+                sql = string.Format("insert into wos_match(title_id,title,ut,titlematchvalue,yearmatch) values({0},'{1}','{2}','{3}','{4}')",
+               id, title.Replace("'", "''"),
+               UT,
+               matchValue,
+               "-1");
+                ExecuteInsert(sql);
+            }
+            catch (Exception e)
+            {
+                Logs.WriteLog(string.Format("{0}\r\n{1}", e.Message, sql));
+                throw e;
+            }
+        }
+
         internal static void SaveMatchDataError(string title, string id, string errormessage) {
             string sql = string.Empty;
             try {
@@ -91,7 +111,7 @@ namespace Core.DBConnector {
         internal static void SaveWosData(WosData wosData) {
             string sql = string.Empty;
             try {
-                sql = "insert into wos_data(PT,AU,BA,BE,GP,AF,BF,CA,TI,SO,SE,BS,LA,DT,CT,CY,CL,SP,HO,DE,ID,AB,C1,RP,EM,RI,OI,FU,FX,CR,NR,TC,Z9,U1,U2,PU,PI,PA,SN,EI,BN,J9,JI,PD,PY,VL,\"IS\",PN,SU,SI,MA,BP,EP,AR,DI,D2,PG,WC,SC,GA,UT,PM) values(";
+                sql = "insert into wos_data(PT,AU,BA,BE,GP,AF,BF,CA,TI,SO,SE,BS,LA,DT,CT,CY,CL,SP,HO,DE,ID,AB,C1,RP,EM,RI,OI,FU,FX,CR,NR,TC,Z9,U1,U2,PU,PI,PA,SN,EI,BN,J9,JI,PD,PY,VL,ISS,PN,SU,SI,MA,BP,EP,AR,DI,D2,PG,WC,SC,GA,UT,PM) values(";
                 sql += GetInsertStr(wosData);
                 sql += ")";
                 ExecuteInsert(sql);
@@ -100,10 +120,12 @@ namespace Core.DBConnector {
             }
         }
 
+
+
         internal static void SaveWosDataLong(WosData wosData) {
             string sql = string.Empty;
             try {
-                sql = "insert into wos_data(PT,AU,BA,BE,GP,AF,BF,CA,TI,SO,SE,BS,LA,DT,CT,CY,CL,SP,HO,DE,ID,AB,C1,RP,EM,RI,OI,FU,FX,CR,NR,TC,Z9,U1,U2,PU,PI,PA,SN,EI,BN,J9,JI,PD,PY,VL,\"IS\",PN,SU,SI,MA,BP,EP,AR,DI,D2,PG,WC,SC,GA,UT,PM) values(:PT,:AU,:BA,:BE,:GP,:AF,:BF,:CA,:TI,:SO,:SE,:BS,:LA,:DT,:CT,:CY,:CL,:SP,:HO,:DE,:ID,:AB,:C1,:RP,:EM,:RI,:OI,:FU,:FX,:CR,:NR,:TC,:Z9,:U1,:U2,:PU,:PI,:PA,:SN,:EI,:BN,:J9,:JI,:PD,:PY,:VL,:ISS,:PN,:SU,:SI,:MA,:BP,:EP,:AR,:DI,:D2,:PG,:WC,:SC,:GA,:UT,:PM)";
+                sql = "insert into wos_data(PT,AU,BA,BE,GP,AF,BF,CA,TI,SO,SE,BS,LA,DT,CT,CY,CL,SP,HO,DE,ID,AB,C1,RP,EM,RI,OI,FU,FX,CR,NR,TC,Z9,U1,U2,PU,PI,PA,SN,EI,BN,J9,JI,PD,PY,VL,ISS,PN,SU,SI,MA,BP,EP,AR,DI,D2,PG,WC,SC,GA,UT,PM) values(:PT,:AU,:BA,:BE,:GP,:AF,:BF,:CA,:TI,:SO,:SE,:BS,:LA,:DT,:CT,:CY,:CL,:SP,:HO,:DE,:ID,:AB,:C1,:RP,:EM,:RI,:OI,:FU,:FX,:CR,:NR,:TC,:Z9,:U1,:U2,:PU,:PI,:PA,:SN,:EI,:BN,:J9,:JI,:PD,:PY,:VL,:ISS,:PN,:SU,:SI,:MA,:BP,:EP,:AR,:DI,:D2,:PG,:WC,:SC,:GA,:UT,:PM)";
 
                 using (OracleConnection connection = new OracleConnection(SearcherTool.ConnectString)) {
                     connection.Open();

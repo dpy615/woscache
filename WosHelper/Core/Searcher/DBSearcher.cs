@@ -21,5 +21,42 @@ namespace Core.Searcher {
                 return wosData;
             }
         }
+
+        public bool SearchOracle(string title,string id)
+        {
+            title = title.Replace("'", "''");
+            DataTable dt = DBConnector.OracleCon.ExecuteSelect("select * from wos_match where title = '" + title + "'");
+            if (dt.Rows.Count < 1)
+            {
+                return false;
+            }
+            else
+            {
+                var a  = "title_id,title,ut,titlematchvalue,yearmatch";
+                DataRow dr = dt.Rows[0];
+                string UT = dr["ut"].ToString();
+                string matchValue = dr["titlematchvalue"].ToString();
+                DBConnector.OracleCon.SaveMatchData(UT, title, id,matchValue);
+                return true;
+            }
+            
+        }
+
+        internal int GetMaxTiTleIndex()
+        {
+            try
+            {
+                string sql = "select max(INTERNAL_ID) maxIndex in de_reference where  citation_type='J'";
+                DataTable dt = DBConnector.OracleCon.ExecuteSelect(sql);
+                string strIndex = dt.Rows[0][0].ToString();
+                int intIndex = int.Parse(strIndex);
+                return intIndex;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+            
+        }
     }
 }
