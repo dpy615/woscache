@@ -91,11 +91,12 @@ namespace Core
 
         private void ReadConfig()
         {
+            string path = System.AppDomain.CurrentDomain.BaseDirectory;
             ConnectString = System.Configuration.ConfigurationManager.AppSettings["ConnectString"];
             double.TryParse(System.Configuration.ConfigurationManager.AppSettings["MatchOk"], out matchOk);
             int.TryParse(ConfigurationManager.AppSettings["ThreadCount"], out threadCount);
             int.TryParse(ConfigurationManager.AppSettings["TimeInterval"], out timeInterval);
-            int.TryParse(File.ReadAllText("titleIndex.cfg").Trim(), out nowIndex);
+            int.TryParse(File.ReadAllText(path+"titleIndex.cfg").Trim(), out nowIndex);
             // MySqlCon.CheckTables();
         }
 

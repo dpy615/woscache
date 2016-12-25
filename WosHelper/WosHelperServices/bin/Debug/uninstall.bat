@@ -1,0 +1,3 @@
+net stop WosHelperServices
+sc delete WosHelperServices
+pause
