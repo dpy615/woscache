@@ -46,7 +46,7 @@ namespace Core.Searcher {
         {
             try
             {
-                string sql = "select max(INTERNAL_ID) maxIndex in de_reference where  citation_type='J'";
+                string sql = "select max(INTERNAL_ID) maxIndex from de_reference where  citation_type='J'";
                 DataTable dt = DBConnector.OracleCon.ExecuteSelect(sql);
                 string strIndex = dt.Rows[0][0].ToString();
                 int intIndex = int.Parse(strIndex);

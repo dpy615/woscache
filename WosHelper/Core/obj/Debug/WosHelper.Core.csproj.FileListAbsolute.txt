@@ -23,4 +23,3 @@ C:\Users\Administrator\Documents\GitHub\woscache\WosHelper\Core\bin\Debug\Core.d
 C:\Users\Administrator\Documents\GitHub\woscache\WosHelper\Core\bin\Debug\Core.dll
 C:\Users\Administrator\Documents\GitHub\woscache\WosHelper\Core\bin\Debug\Core.pdb
 C:\Users\Administrator\Documents\GitHub\woscache\WosHelper\Core\bin\Debug\mysql.data.dll
-C:\Users\Administrator\Documents\GitHub\woscache\WosHelper\Core\obj\Debug\WosHelper.Core.csprojResolveAssemblyReference.cache
