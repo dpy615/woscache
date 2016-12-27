@@ -44,13 +44,14 @@ namespace Core
         private WosSearcher wosSearcher = new WosSearcher();
         private DBSearcher dbSearcher;
         private Thread searchThread;
-       
+
         public bool bRunFlg = false;
         public List<WosSearcher> searchers = new List<WosSearcher>();
 
 
         public SearcherTool()
         {
+
             ReadConfig();
             for (int i = 0; i < threadCount; i++)
             {
@@ -96,7 +97,13 @@ namespace Core
             double.TryParse(System.Configuration.ConfigurationManager.AppSettings["MatchOk"], out matchOk);
             int.TryParse(ConfigurationManager.AppSettings["ThreadCount"], out threadCount);
             int.TryParse(ConfigurationManager.AppSettings["TimeInterval"], out timeInterval);
-            int.TryParse(File.ReadAllText(path+"titleIndex.cfg").Trim(), out nowIndex);
+            int.TryParse(File.ReadAllText(path + "titleIndex.cfg").Trim(), out nowIndex);
+            string initmsg = "INIT\r\n";
+            initmsg += "ThreadCount:" + threadCount+"\r\n";
+            initmsg += "TimeInterval:" + timeInterval+"\r\n";
+            initmsg += "TitleIndex:" + nowIndex+ "\r\n";
+            Logs.WriteLog(initmsg);
+            Console.WriteLine(initmsg);
             // MySqlCon.CheckTables();
         }
 
@@ -207,6 +214,8 @@ namespace Core
 
         private void M_DealTitle(string title, string id, WosSearcher tmpSearcher)
         {
+            bool b = true;
+        start:
             try
             {
                 WosData wosData = tmpSearcher.SearchNoInit(title);
@@ -239,14 +248,25 @@ namespace Core
                         OracleCon.SaveMatchDataError(title, id, "no data match");
                     }
                 }
+                b = true;
             }
             catch (Exception e)
             {
+                if (e.Message == "wos数据下载超时")
+                {
+                    b = false;
+                    Logs.WriteLog(string.Format("{0}\r\n{1}\r\n{2}", title, e.Message, "请检查网络连接是否正常"));
+                    goto start;
+                }
+                b = true;
                 OracleCon.SaveMatchDataError(title, id, e.Message);
             }
             finally
             {
-                tmpSearcher.isbusy = false;
+                if (b)
+                {
+                    tmpSearcher.isbusy = false;
+                }
             }
             SetTitleIndex(id);
         }

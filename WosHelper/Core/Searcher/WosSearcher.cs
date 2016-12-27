@@ -208,8 +208,13 @@ namespace Core.Searcher {
 
             result = http.GetHtml(item);
             MoveTmp(http, ref result, cookie);
-
+            
             string res = result.Html;
+            Console.WriteLine(res);
+            if (res.Contains("超时") || res.Contains("timed out"))
+            {
+                throw new Exception("wos数据下载超时");
+            }
             string txt = res.Replace("\n", "").Split('\r')[1];
             string[] resArr = res.Replace("\n", "").Split('\r')[1].Split('\t');
             sReturn = new string[resArr.Length + 3];
