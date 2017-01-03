@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 
 namespace Core.Searcher {
 
@@ -13,6 +14,7 @@ namespace Core.Searcher {
         HttpHelper http = null;
         HttpResult result;
         string cookie;
+        static Random dom = new Random();
 
         int searchCount = -1;
         public bool isbusy = false;
@@ -53,7 +55,12 @@ namespace Core.Searcher {
         /// </summary>
         /// <param name="title"></param>
         /// <returns></returns>
-        public WosData SearchNoInit(string title) {
+        public WosData SearchNoInit(string title,int random) {
+            if (random > 0)
+            {
+                int slper = (int)(dom.NextDouble() * random * 1000);
+                Thread.Sleep(slper);
+            }
             if (searchCount == -1) {
                 this.InitHttp();
             }

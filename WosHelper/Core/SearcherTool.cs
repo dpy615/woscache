@@ -39,10 +39,23 @@ namespace Core
         /// 访问wos的最大线程数
         /// </summary>
         private int threadCount = 10;
+        /// <summary>
+        /// 每次访问wos的间隔，randomTime*随机值（0-1）
+        /// </summary>
+        private int randomTime = 10;
+
+        /// <summary>
+        /// 所有的起始时间
+        /// </summary>
+        private List<DateTime> startTimes = new List<DateTime>();
+        /// <summary>
+        /// 所有的结束时间
+        /// </summary>
+        private List<DateTime> endTimes = new List<DateTime>();
 
         private System.Timers.Timer timer;
         private WosSearcher wosSearcher = new WosSearcher();
-        private DBSearcher dbSearcher;
+        private DBSearcher dbSearcher = new DBSearcher();
         private Thread searchThread;
 
         public bool bRunFlg = false;
@@ -58,7 +71,6 @@ namespace Core
                 WosSearcher searcher = new WosSearcher();
                 searchers.Add(searcher);
             }
-            dbSearcher = new DBSearcher();
             maxIndex = dbSearcher.GetMaxTiTleIndex();
 
             timer = new System.Timers.Timer();
@@ -97,14 +109,42 @@ namespace Core
             double.TryParse(System.Configuration.ConfigurationManager.AppSettings["MatchOk"], out matchOk);
             int.TryParse(ConfigurationManager.AppSettings["ThreadCount"], out threadCount);
             int.TryParse(ConfigurationManager.AppSettings["TimeInterval"], out timeInterval);
+            int.TryParse(ConfigurationManager.AppSettings["RandomTime"], out randomTime);
             int.TryParse(File.ReadAllText(path + "titleIndex.cfg").Trim(), out nowIndex);
+
+            SplitTime(ConfigurationManager.AppSettings["SearchTime1"].ToString().Trim());
+            SplitTime(ConfigurationManager.AppSettings["SearchTime2"].ToString().Trim());
+            SplitTime(ConfigurationManager.AppSettings["SearchTime3"].ToString().Trim());
+
             string initmsg = "INIT\r\n";
-            initmsg += "ThreadCount:" + threadCount+"\r\n";
-            initmsg += "TimeInterval:" + timeInterval+"\r\n";
-            initmsg += "TitleIndex:" + nowIndex+ "\r\n";
+            initmsg += "ThreadCount:" + threadCount + "\r\n";
+            initmsg += "TimeInterval:" + timeInterval + "\r\n";
+            initmsg += "TitleIndex:" + nowIndex + "\r\n";
+            initmsg += "RandomTime:" + randomTime + "\r\n";
             Logs.WriteLog(initmsg);
             Console.WriteLine(initmsg);
             // MySqlCon.CheckTables();
+        }
+
+        private void SplitTime(string times)
+        {
+            if (string.IsNullOrEmpty(times) || !times.Contains("-"))
+            {
+                return;
+            }
+            string start = times.Split('-')[0];
+            string end = times.Split('-')[1];
+            DateTime startTm;
+            DateTime endTm;
+            if (DateTime.TryParse(start, out startTm) && DateTime.TryParse(end, out endTm))
+            {
+                startTimes.Add(startTm);
+                endTimes.Add(endTm);
+            }
+            else
+            {
+                Logs.WriteLog("时间范围设置不正确：" + times);
+            }
         }
 
         private void SetTitleIndex(string index)
@@ -135,6 +175,12 @@ namespace Core
         {
             while (bRunFlg)
             {
+                if (!CheckTimeIsOK())
+                {
+                    Thread.Sleep(1000 * 10);
+                    continue;
+                }
+
                 int start = nowIndex + 1;
                 int end = nowIndex + 500;
                 if (start >= maxIndex)
@@ -149,6 +195,30 @@ namespace Core
                 SearchDataToOracle(start, end);
                 Thread.Sleep(1000 * 10);
             }
+        }
+
+        /// <summary>
+        /// 检查当前时间是否在设置的允许抓取数据的时间范围内
+        /// </summary>
+        /// <returns></returns>
+        private bool CheckTimeIsOK()
+        {
+            if (startTimes.Count < 1)
+            {
+                return true;
+            }
+            DateTime dtNow = DateTime.Now;
+            for (int i = 0; i < startTimes.Count; i++) 
+            {
+                var dtStart = new DateTime(dtNow.Year, dtNow.Month, dtNow.Day,startTimes[i].Hour, startTimes[i].Minute,startTimes[i].Second);
+                var dtEnd = new DateTime(dtNow.Year, dtNow.Month, dtNow.Day, endTimes[i].Hour, endTimes[i].Minute, endTimes[i].Second);
+                if(dtNow >= dtStart && dtNow <= dtEnd)
+                {
+                    return true;
+                }
+            }
+            return false;
+            
         }
 
         public delegate void DealTitle(string title, string id, WosSearcher searcher);
@@ -218,7 +288,7 @@ namespace Core
         start:
             try
             {
-                WosData wosData = tmpSearcher.SearchNoInit(title);
+                WosData wosData = tmpSearcher.SearchNoInit(title, randomTime);
                 if (wosData != null)
                 {
                     double matchTmp = 0;
